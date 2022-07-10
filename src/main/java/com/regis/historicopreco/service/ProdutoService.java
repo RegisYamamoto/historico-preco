@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -19,7 +18,7 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public void salvarProduto(ProdutoRequestDTO produtoRequestDTO) {
+    public void cadastrarProduto(ProdutoRequestDTO produtoRequestDTO) {
         Produto produto = new Produto();
         produto.setId(produtoRequestDTO.getId());
         produto.setNome(produtoRequestDTO.getNome());
@@ -54,7 +53,8 @@ public class ProdutoService {
         if (!produto.isPresent()) {
             return null;
         }
-        ProdutoResponseDTO produtoResponseDTO = ProdutoResponseDTO.builder()
+
+        return ProdutoResponseDTO.builder()
                 .id(produto.get().getId())
                 .nome(produto.get().getNome())
                 .descricao(produto.get().getDescricao())
@@ -63,6 +63,5 @@ public class ProdutoService {
                 .dataUltAtualizacao(produto.get().getDataUltAtualizacao())
                 .precos(produto.get().getPrecos())
                 .build();
-        return produtoResponseDTO;
     }
 }

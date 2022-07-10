@@ -19,13 +19,13 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity salvarProduto(@Validated @RequestBody ProdutoRequestDTO produtoRequestDTO) {
+    public ResponseEntity<Object> cadastrarProduto(@Validated @RequestBody ProdutoRequestDTO produtoRequestDTO) {
         try {
             ProdutoResponseDTO produtoResponseDTO = produtoService.listarProdutoPorId(produtoRequestDTO.getId());
             if (produtoResponseDTO != null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("produto com id " + produtoRequestDTO.getId() + " já existe");
             }
-            produtoService.salvarProduto(produtoRequestDTO);
+            produtoService.cadastrarProduto(produtoRequestDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
