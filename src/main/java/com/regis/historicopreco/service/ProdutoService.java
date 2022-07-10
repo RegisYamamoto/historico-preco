@@ -19,12 +19,14 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     public void cadastrarProduto(ProdutoRequestDTO produtoRequestDto) {
-        Produto produto = new Produto();
-        produto.setId(produtoRequestDto.getId());
-        produto.setNome(produtoRequestDto.getNome());
-        produto.setDescricao(produtoRequestDto.getDescricao());
-        produto.setMarca(produtoRequestDto.getMarca());
-        produto.setDataCadastro(LocalDateTime.now());
+        Produto produto = Produto.builder()
+                .id(produtoRequestDto.getId())
+                .nome(produtoRequestDto.getNome())
+                .descricao(produtoRequestDto.getDescricao())
+                .marca(produtoRequestDto.getMarca())
+                .dataCadastro(LocalDateTime.now())
+                .build();
+
         produtoRepository.save(produto);
     }
 

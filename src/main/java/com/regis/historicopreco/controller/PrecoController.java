@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -27,13 +25,14 @@ public class PrecoController {
     @Autowired
     private PrecoService precoService;
 
-    public ResponseEntity<Object> cadastrarPreco(@PathVariable String produtoId, @Validated @RequestBody PrecoRequestDTO precoRequestDto) {
+    @PostMapping
+    public ResponseEntity<Object> cadastrarPreco(@PathVariable String produtoId, @Valid @RequestBody PrecoRequestDTO precoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoId);
         if (produtoResponseDto == null) {
             return ResponseEntity.badRequest().body("produto com id" + produtoId + " não existe");
         }
-        precoService.cadastrarPreco(precoRequestDto, produtoResponseDto);
 
+        precoService.cadastrarPreco(precoRequestDto, produtoResponseDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(precoRequestDto);
     }

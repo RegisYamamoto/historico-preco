@@ -1,6 +1,8 @@
 package com.regis.historicopreco.model;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.agent.builder.AgentBuilder;
@@ -12,7 +14,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "produto")
 public class Produto {
 

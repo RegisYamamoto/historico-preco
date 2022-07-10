@@ -20,12 +20,14 @@ class ProdutoServiceTest {
 	private ProdutoService produtoService;
 
 	@Test
-	public void deveTestarMetodoCadastrarProdutoComSucesso() throws Exception {
-		ProdutoRequestDTO produtoRequestDtoMock = new ProdutoRequestDTO();
-		produtoRequestDtoMock.setId("aww");
-		produtoRequestDtoMock.setNome("banana");
-		produtoRequestDtoMock.setDescricao("banana");
-		produtoRequestDtoMock.setMarca("Panasonic");
+	public void quandoChamoOMetodoCadastrarProdutoComSucesso_deveCadastrarComSucesso() throws Exception {
+		ProdutoRequestDTO produtoRequestDtoMock = ProdutoRequestDTO.builder()
+				.id("aww")
+				.nome("banana")
+				.descricao("banana")
+				.marca("Panasonic")
+				.build();
+
 		produtoService.cadastrarProduto(produtoRequestDtoMock);
 		verify(produtoRepository, times(1)).save(any());
 	}

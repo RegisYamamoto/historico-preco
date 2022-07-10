@@ -1,23 +1,20 @@
 package com.regis.historicopreco.model.dto;
 
-import com.regis.historicopreco.model.Produto;
-import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class PrecoRequestDTO {
 
-    @NotNull
+    @NotNull(message = "campo preco não pode ser null")
     private BigDecimal preco;
 
-    private LocalDateTime dataConsulta;
-
-    @NotNull
-    private String lojaConsultadada;
-
-    private Produto produto;
+    @NotBlank(message = "campo lojaConsultada não pode ser vazio ou null")
+    private String lojaConsultada;
 
 }

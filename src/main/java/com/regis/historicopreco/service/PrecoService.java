@@ -8,6 +8,7 @@ import com.regis.historicopreco.repository.PrecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
@@ -28,7 +29,7 @@ public class PrecoService {
         Preco preco = new Preco();
         preco.setPreco(precoRequestDto.getPreco());
         preco.setDataConsulta(LocalDateTime.now());
-        preco.setLojaConsultadada(precoRequestDto.getLojaConsultadada());
+        preco.setLojaConsultadada(precoRequestDto.getLojaConsultada());
         preco.setProduto(produto);
 
         precoRepository.save(preco);

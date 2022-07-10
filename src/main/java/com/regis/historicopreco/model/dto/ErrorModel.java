@@ -1,9 +1,12 @@
 package com.regis.historicopreco.model.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+@Data
 public class ErrorModel {
 
     private HttpStatus httpStatus;
@@ -21,19 +24,4 @@ public class ErrorModel {
         this.details = details;
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getDetails() {
-        return details;
-    }
 }
