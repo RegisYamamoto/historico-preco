@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,18 +20,14 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<Object> cadastrarProduto(@Validated @RequestBody ProdutoRequestDTO produtoRequestDTO) {
-        try {
-            ProdutoResponseDTO produtoResponseDTO = produtoService.listarProdutoPorId(produtoRequestDTO.getId());
-            if (produtoResponseDTO != null) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("produto com id " + produtoRequestDTO.getId() + " já existe");
-            }
-            produtoService.cadastrarProduto(produtoRequestDTO);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<Object> cadastrarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
+        ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
+        if (produtoResponseDto != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("produto com id " + produtoRequestDto.getId() + " já existe");
         }
+        produtoService.cadastrarProduto(produtoRequestDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(produtoRequestDto);
     }
 
     @GetMapping

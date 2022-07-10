@@ -18,12 +18,12 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public void cadastrarProduto(ProdutoRequestDTO produtoRequestDTO) {
+    public void cadastrarProduto(ProdutoRequestDTO produtoRequestDto) {
         Produto produto = new Produto();
-        produto.setId(produtoRequestDTO.getId());
-        produto.setNome(produtoRequestDTO.getNome());
-        produto.setDescricao(produtoRequestDTO.getDescricao());
-        produto.setMarca(produtoRequestDTO.getMarca());
+        produto.setId(produtoRequestDto.getId());
+        produto.setNome(produtoRequestDto.getNome());
+        produto.setDescricao(produtoRequestDto.getDescricao());
+        produto.setMarca(produtoRequestDto.getMarca());
         produto.setDataCadastro(LocalDateTime.now());
         produtoRepository.save(produto);
     }
@@ -31,9 +31,9 @@ public class ProdutoService {
     public List<ProdutoResponseDTO> listarTodosProdutos() {
         List<Produto> produtos = produtoRepository.findAll();
 
-        List<ProdutoResponseDTO> produtosResponseDTO = new ArrayList<>();
+        List<ProdutoResponseDTO> produtosResponseDto = new ArrayList<>();
         for (Produto produto : produtos) {
-            ProdutoResponseDTO produtoResponseDTO = ProdutoResponseDTO.builder()
+            ProdutoResponseDTO produtoResponseDto = ProdutoResponseDTO.builder()
                     .id(produto.getId())
                     .nome(produto.getNome())
                     .descricao(produto.getDescricao())
@@ -42,10 +42,10 @@ public class ProdutoService {
                     .dataUltAtualizacao(produto.getDataUltAtualizacao())
                     .precos(produto.getPrecos())
                     .build();
-            produtosResponseDTO.add(produtoResponseDTO);
+            produtosResponseDto.add(produtoResponseDto);
         }
 
-        return produtosResponseDTO;
+        return produtosResponseDto;
     }
 
     public ProdutoResponseDTO listarProdutoPorId(String id) {

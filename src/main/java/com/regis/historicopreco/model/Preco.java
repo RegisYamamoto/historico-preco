@@ -2,6 +2,7 @@ package com.regis.historicopreco.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "preco")
 public class Preco {
 

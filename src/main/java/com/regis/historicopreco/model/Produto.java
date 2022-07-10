@@ -20,7 +20,6 @@ public class Produto {
     @Column(name = "id")
     private String id;
 
-    @NotNull
     @Column(name = "nome")
     private String nome;
 
@@ -30,7 +29,6 @@ public class Produto {
     @Column(name = "marca")
     private String marca;
 
-    @NotNull
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
