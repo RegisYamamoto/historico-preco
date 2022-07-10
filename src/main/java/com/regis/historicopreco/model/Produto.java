@@ -30,6 +30,13 @@ public class Produto {
     @Column(name = "marca")
     private String marca;
 
+    @NotNull
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro;
+
+    @Column(name = "data_ult_atualizacao")
+    private LocalDateTime dataUltAtualizacao;
+
     @OneToMany(mappedBy = "produto")
     private List<Preco> precos;
 

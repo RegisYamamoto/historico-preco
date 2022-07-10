@@ -11,6 +11,5 @@ public class ProdutoRequestDTO {
     private String nome;
     private String descricao;
     private String marca;
-    private List<Preco> precos;
 
 }
