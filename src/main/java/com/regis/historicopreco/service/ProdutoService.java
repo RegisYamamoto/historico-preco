@@ -3,10 +3,12 @@ package com.regis.historicopreco.service;
 import com.regis.historicopreco.model.Produto;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PrecoRepository precoRepository;
 
     public void cadastrarProduto(ProdutoRequestDTO produtoRequestDto) {
         Produto produto = Produto.builder()
@@ -79,5 +84,10 @@ public class ProdutoService {
                 .build();
 
         produtoRepository.save(produto);
+    }
+
+    public void excluirProduto(String id) {
+        precoRepository.deleteAllByProdutoId(id);
+        produtoRepository.deleteById(id);
     }
 }

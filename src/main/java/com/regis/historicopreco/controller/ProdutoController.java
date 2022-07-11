@@ -50,4 +50,17 @@ public class ProdutoController {
         return ResponseEntity.ok().body("produto atualizado com sucesso");
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> excluirProduto(@PathVariable String id) {
+        ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(id);
+
+        if (produtoResponseDto == null) {
+            return ResponseEntity.badRequest().body("produto com id " + id + " não existe");
+        }
+
+        produtoService.excluirProduto(id);
+
+        return ResponseEntity.ok().body("produto " + id + " excluído com sucesso");
+    }
+
 }
