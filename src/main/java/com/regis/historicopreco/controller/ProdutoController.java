@@ -20,6 +20,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
+    @ResponseBody
     public ResponseEntity<Object> cadastrarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
         if (produtoResponseDto != null) {

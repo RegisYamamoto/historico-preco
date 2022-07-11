@@ -3,9 +3,9 @@ package com.regis.historicopreco.service;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -13,10 +13,10 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class ProdutoServiceTest {
 
-	@Mock
+	@MockBean
 	private ProdutoRepository produtoRepository;
 
-	@InjectMocks
+	@Autowired
 	private ProdutoService produtoService;
 
 	@Test

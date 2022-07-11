@@ -1,5 +1,6 @@
 package com.regis.historicopreco.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +37,7 @@ public class Preco {
     private String lojaConsultadada;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
