@@ -66,4 +66,18 @@ public class ProdutoService {
                 .precos(produto.get().getPrecos())
                 .build();
     }
+
+    public void atualizarProduto(ProdutoRequestDTO produtoRequestDto, ProdutoResponseDTO produtoResponseDto) {
+        Produto produto = Produto.builder()
+                .id(produtoRequestDto.getId())
+                .nome(produtoRequestDto.getNome())
+                .descricao(produtoRequestDto.getDescricao())
+                .marca(produtoRequestDto.getMarca())
+                .dataCadastro(produtoResponseDto.getDataCadastro())
+                .dataUltAtualizacao(LocalDateTime.now())
+                .precos(produtoResponseDto.getPrecos())
+                .build();
+
+        produtoRepository.save(produto);
+    }
 }

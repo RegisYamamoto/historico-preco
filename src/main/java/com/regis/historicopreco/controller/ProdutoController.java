@@ -37,4 +37,17 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtos);
     }
 
+    @PutMapping
+    public ResponseEntity<Object> atualizarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
+        ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
+
+        if (produtoResponseDto == null) {
+            return ResponseEntity.badRequest().body("produto com id " + produtoRequestDto.getId() + " não existe");
+        }
+
+        produtoService.atualizarProduto(produtoRequestDto, produtoResponseDto);
+
+        return ResponseEntity.ok().body("produto atualizado com sucesso");
+    }
+
 }
