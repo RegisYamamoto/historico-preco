@@ -1,5 +1,6 @@
 package com.regis.historicopreco.service;
 
+import com.regis.historicopreco.controller.Mocks;
 import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
@@ -24,21 +25,7 @@ public class PrecoServiceTest {
 
     @Test
     public void quandoChamoMetodoCadastrarPreco_deveSalvarComSucesso() {
-        PrecoRequestDTO precoRequestDtoMock = PrecoRequestDTO.builder()
-                .preco(new BigDecimal(10.10))
-                .lojaConsultada("Americanas.com")
-                .build();
-
-        ProdutoResponseDTO produtoResponseDtoMock = ProdutoResponseDTO.builder()
-                .id("aaa")
-                .nome("banana")
-                .descricao("banana")
-                .marca("Panasonic")
-                .dataCadastro(LocalDateTime.now())
-                .dataUltAtualizacao(LocalDateTime.now())
-                .build();
-
-        precoService.cadastrarPreco(precoRequestDtoMock, produtoResponseDtoMock);
+        precoService.cadastrarPreco(Mocks.criarMockDePrecoRequestDTO(), Mocks.criarMockDeProdutoResponseDTO());
         verify(precoRepository, times(1)).save(any());
     }
 

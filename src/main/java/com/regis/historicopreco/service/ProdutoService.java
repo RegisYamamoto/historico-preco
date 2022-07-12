@@ -39,15 +39,15 @@ public class ProdutoService {
 
         List<ProdutoResponseDTO> produtosResponseDto = new ArrayList<>();
         for (Produto produto : produtos) {
-            ProdutoResponseDTO produtoResponseDto = ProdutoResponseDTO.builder()
-                    .id(produto.getId())
-                    .nome(produto.getNome())
-                    .descricao(produto.getDescricao())
-                    .marca(produto.getMarca())
-                    .dataCadastro(produto.getDataCadastro())
-                    .dataUltAtualizacao(produto.getDataUltAtualizacao())
-                    .precos(produto.getPrecos())
-                    .build();
+            ProdutoResponseDTO produtoResponseDto = new ProdutoResponseDTO();
+            produtoResponseDto.setId(produto.getId());
+            produtoResponseDto.setNome(produto.getNome());
+            produtoResponseDto.setDescricao(produto.getDescricao());
+            produtoResponseDto.setMarca(produto.getMarca());
+            produtoResponseDto.setDataCadastro(produto.getDataCadastro());
+            produtoResponseDto.setDataUltAtualizacao(produto.getDataUltAtualizacao());
+            produtoResponseDto.setPrecos(produto.getPrecos());
+
             produtosResponseDto.add(produtoResponseDto);
         }
 
@@ -57,18 +57,19 @@ public class ProdutoService {
     public ProdutoResponseDTO listarProdutoPorId(String id) {
         Optional<Produto> produto = produtoRepository.findById(id);
         if (!produto.isPresent()) {
-            return null;
+            return new ProdutoResponseDTO();
         }
 
-        return ProdutoResponseDTO.builder()
-                .id(produto.get().getId())
-                .nome(produto.get().getNome())
-                .descricao(produto.get().getDescricao())
-                .marca(produto.get().getMarca())
-                .dataCadastro(produto.get().getDataCadastro())
-                .dataUltAtualizacao(produto.get().getDataUltAtualizacao())
-                .precos(produto.get().getPrecos())
-                .build();
+        ProdutoResponseDTO produtoResponseDto = new ProdutoResponseDTO();
+        produtoResponseDto.setId(produto.get().getId());
+        produtoResponseDto.setNome(produto.get().getNome());
+        produtoResponseDto.setDescricao(produto.get().getDescricao());
+        produtoResponseDto.setMarca(produto.get().getMarca());
+        produtoResponseDto.setDataCadastro(produto.get().getDataCadastro());
+        produtoResponseDto.setDataUltAtualizacao(produto.get().getDataUltAtualizacao());
+        produtoResponseDto.setPrecos(produto.get().getPrecos());
+
+        return produtoResponseDto;
     }
 
     public void atualizarProduto(ProdutoRequestDTO produtoRequestDto, ProdutoResponseDTO produtoResponseDto) {

@@ -19,14 +19,14 @@ public class Mocks {
     }
 
     public static ProdutoResponseDTO criarMockDeProdutoResponseDTO() {
-        return ProdutoResponseDTO.builder()
-                .id("lkjwert")
-                .nome("banana novo")
-                .descricao("banana novo")
-                .marca("Panasonic")
-                .dataCadastro(LocalDateTime.now())
-                .dataUltAtualizacao(LocalDateTime.now())
-                .build();
+        ProdutoResponseDTO produtoResponseDtoMock = new ProdutoResponseDTO();
+        produtoResponseDtoMock.setId("lkjwert");
+        produtoResponseDtoMock.setNome("banana novo");
+        produtoResponseDtoMock.setDescricao("banana novo");
+        produtoResponseDtoMock.setMarca("Panasonic");
+        produtoResponseDtoMock.setDataCadastro(LocalDateTime.now());
+        produtoResponseDtoMock.setDataUltAtualizacao(LocalDateTime.now());
+        return produtoResponseDtoMock;
     }
 
     public static PrecoRequestDTO criarMockDePrecoRequestDTO() {

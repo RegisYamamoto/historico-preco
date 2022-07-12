@@ -26,8 +26,8 @@ public class PrecoController {
     @PostMapping()
     public ResponseEntity<Object> cadastrarPreco(@PathVariable String produtoId, @Valid @RequestBody PrecoRequestDTO precoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoId);
-        if (produtoResponseDto == null) {
-            return ResponseEntity.badRequest().body("produto com id" + produtoId + " não existe");
+        if (produtoResponseDto.getId().isEmpty()) {
+            return ResponseEntity.badRequest().body("produto com id " + produtoId + " não existe");
         }
 
         precoService.cadastrarPreco(precoRequestDto, produtoResponseDto);
