@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,6 +75,18 @@ public class ProdutoControllerTest {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(criarMockDeProdutoRequestDTO()))
         ).andExpect(status().isOk());
+    }
+
+    @Test
+    public void quandoChamarOMetodoExcluirProduto_deveExcluirComSucesso() throws Exception {
+        when(produtoService.listarProdutoPorId("lçkj345")).thenReturn(criarMockDeProdutoResponseDTO());
+        doNothing().when(produtoService).excluirProduto("lçkj345");
+
+        this.mockMvc.perform(
+                delete("/produtos/lçkj345")
+        ).andExpect(status().isOk());
+
+        produtoService.excluirProduto("lkjh2345");
     }
 
     public ProdutoRequestDTO criarMockDeProdutoRequestDTO() {
