@@ -41,7 +41,7 @@ public class ProdutoController {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
 
         if (produtoResponseDto == null) {
-            return ResponseEntity.badRequest().body("produto com id " + produtoRequestDto.getId() + " não existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto com id " + produtoRequestDto.getId() + " não existe");
         }
 
         produtoService.atualizarProduto(produtoRequestDto, produtoResponseDto);
@@ -54,7 +54,7 @@ public class ProdutoController {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(id);
 
         if (produtoResponseDto == null) {
-            return ResponseEntity.badRequest().body("produto com id " + id + " não existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto com id " + id + " não existe");
         }
 
         produtoService.excluirProduto(id);

@@ -17,6 +17,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
@@ -38,7 +39,7 @@ public class PrecoControllerTest {
     private ProdutoService produtoService;
 
     @Test
-    public void quandoChamarMetodoCadastrarPreco_deveCadastrarComSucesso() throws Exception {
+    public void quandoChamarMetodoCadastrarPreco_deveCadastrarOPrecoComSucesso() throws Exception {
         when(produtoService.listarProdutoPorId("SM-F926BZKGZTO")).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
         doNothing().when(precoService).cadastrarPreco(Mocks.criarMockDePrecoRequestDTO(), Mocks.criarMockDeProdutoResponseDTO());
 
@@ -50,21 +51,24 @@ public class PrecoControllerTest {
     }
 
     @Test
-    public void quandoChamarMetodoAtualizarPreco_deveAtualizarPrecoComSucesso() throws Exception {
-        Preco precoMock = Preco.builder()
-                .id(3L)
-                .preco(new BigDecimal(10.10))
-                .dataConsulta(LocalDateTime.now())
-                .lojaConsultadada("Americanas.com")
-                .build();
-
-        when(precoService.listarPrecoPorId(3L)).thenReturn(Optional.of(precoMock));
+    public void quandoChamarMetodoAtualizarPreco_deveAtualizarOPrecoComSucesso() throws Exception {
+        when(precoService.listarPrecoPorId(3L)).thenReturn(Optional.of(Mocks.criarMockDePreco()));
 
         this.mockMvc.perform(
                 put("/produtos/SM-F926BZKGZT1/precos/3")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDTO()))
         ).andExpect(status().isOk());
+    }
+
+    @Test
+    public void quandoChamarMetodoExcluirPreco_deveExcluirOPrecoComSucesso() throws Exception {
+        when(precoService.listarPrecoPorId(3L)).thenReturn(Optional.of(Mocks.criarMockDePreco()));
+        doNothing().when(precoService).excluirPreco(3L);
+
+        this.mockMvc.perform(
+                delete("/produtos/SM-F926BZKGZT1/precos/3"))
+                .andExpect(status().isOk());
     }
 
 }

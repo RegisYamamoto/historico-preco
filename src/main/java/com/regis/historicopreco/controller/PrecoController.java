@@ -47,4 +47,16 @@ public class PrecoController {
         return ResponseEntity.ok().body("preco atualizado com sucesso");
     }
 
+    @DeleteMapping("/{precoId}")
+    public ResponseEntity<Object> excluirPreco(@PathVariable Long precoId) {
+        Optional<Preco> preco = precoService.listarPrecoPorId(precoId);
+        if (!preco.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("preço com id " + precoId + " não existe");
+        }
+
+        precoService.excluirPreco(precoId);
+
+        return ResponseEntity.ok().body("preço excluído com sucesso");
+    }
+
 }

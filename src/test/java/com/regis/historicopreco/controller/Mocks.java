@@ -1,5 +1,6 @@
 package com.regis.historicopreco.controller;
 
+import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
@@ -32,6 +33,15 @@ public class Mocks {
         return PrecoRequestDTO.builder()
                 .preco(new BigDecimal(10.10))
                 .lojaConsultada("Madre Leonia")
+                .build();
+    }
+
+    public static Preco criarMockDePreco() {
+        return Preco.builder()
+                .id(3L)
+                .preco(new BigDecimal(10.10))
+                .dataConsulta(LocalDateTime.now())
+                .lojaConsultadada("Americanas.com")
                 .build();
     }
 

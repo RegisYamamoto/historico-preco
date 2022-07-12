@@ -47,4 +47,8 @@ public class PrecoService {
         precoRepository.save(preco);
     }
 
+    public void excluirPreco(Long precoId) {
+        precoRepository.deleteById(precoId);
+    }
+
 }
