@@ -1,6 +1,5 @@
 package com.regis.historicopreco.model.dto;
 
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 

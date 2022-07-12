@@ -1,7 +1,6 @@
 package com.regis.historicopreco.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.service.ProdutoService;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
