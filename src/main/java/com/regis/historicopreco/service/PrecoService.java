@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class PrecoService {
@@ -31,6 +32,18 @@ public class PrecoService {
         preco.setDataConsulta(LocalDateTime.now());
         preco.setLojaConsultadada(precoRequestDto.getLojaConsultada());
         preco.setProduto(produto);
+
+        precoRepository.save(preco);
+    }
+
+    public Optional<Preco> listarPrecoPorId(Long precoId) {
+        return precoRepository.findById(precoId);
+    }
+
+    public void atualizarPreco(Optional<Preco> precoOpt, PrecoRequestDTO precoRequestDto) {
+        Preco preco = precoOpt.get();
+        preco.setPreco(precoRequestDto.getPreco());
+        preco.setLojaConsultadada(precoRequestDto.getLojaConsultada());
 
         precoRepository.save(preco);
     }

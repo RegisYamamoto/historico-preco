@@ -1,8 +1,10 @@
 package com.regis.historicopreco.controller;
 
+import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Mocks {
@@ -24,6 +26,13 @@ public class Mocks {
                 .marca("Panasonic")
                 .dataCadastro(LocalDateTime.now())
                 .dataUltAtualizacao(LocalDateTime.now())
+                .build();
+    }
+
+    public static PrecoRequestDTO criarMockDePrecoRequestDTO() {
+        return PrecoRequestDTO.builder()
+                .preco(new BigDecimal(10.10))
+                .lojaConsultada("Madre Leonia")
                 .build();
     }
 
