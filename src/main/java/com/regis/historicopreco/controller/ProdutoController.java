@@ -36,6 +36,16 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtos);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Object> listarProdutoPorId(@PathVariable String id) {
+        ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(id);
+        if (produtoResponseDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("preduto com id " + id + " não existe");
+        }
+
+        return ResponseEntity.ok().body(produtoResponseDto);
+    }
+
     @PutMapping
     public ResponseEntity<Object> atualizarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());

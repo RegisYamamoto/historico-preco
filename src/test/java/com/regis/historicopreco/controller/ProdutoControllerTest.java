@@ -85,4 +85,11 @@ public class ProdutoControllerTest {
         produtoService.excluirProduto("lkjh2345");
     }
 
+    @Test
+    public void quandoChamarMetodoListarProdutoPorId_deveRetornarOProdutoComSucesso() throws Exception {
+        when(produtoService.listarProdutoPorId("aaa444")).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
+
+        this.mockMvc.perform(get("/produtos/aaa444")).andExpect(status().isOk());
+    }
+
 }
