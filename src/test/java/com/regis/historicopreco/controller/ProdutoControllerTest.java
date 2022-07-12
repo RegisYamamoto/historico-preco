@@ -45,7 +45,7 @@ public class ProdutoControllerTest {
     @Test
     public void quandoChamarMetodoListarTodosProdutos_deveRetornarComSucesso() throws Exception {
         List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
-        produtosResponseDtoMock.add(criarMockDeProdutoResponseDTO());
+        produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDTO());
 
         when(produtoService.listarTodosProdutos()).thenReturn(produtosResponseDtoMock);
 
@@ -56,30 +56,30 @@ public class ProdutoControllerTest {
     @Test
     public void quandoChamarMetodoCadastrarProduto_deveCadastrarComSucesso() throws Exception {
         when(produtoService.listarProdutoPorId("kjh345")).thenReturn(null);
-        doNothing().when(produtoService).cadastrarProduto(criarMockDeProdutoRequestDTO());
+        doNothing().when(produtoService).cadastrarProduto(Mocks.criarMockDeProdutoRequestDTO());
 
         this.mockMvc.perform(
                 post("/produtos")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(criarMockDeProdutoRequestDTO()))
+                        .content(objectMapper.writeValueAsString(Mocks.criarMockDeProdutoRequestDTO()))
         ).andExpect(status().isCreated());
     }
 
     @Test
     public void quandoChamarOMetodoAtualizarProduto_deveAtualizarComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId(any())).thenReturn(criarMockDeProdutoResponseDTO());
-        doNothing().when(produtoService).atualizarProduto(criarMockDeProdutoRequestDTO(), criarMockDeProdutoResponseDTO());
+        when(produtoService.listarProdutoPorId(any())).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
+        doNothing().when(produtoService).atualizarProduto(Mocks.criarMockDeProdutoRequestDTO(), Mocks.criarMockDeProdutoResponseDTO());
 
         this.mockMvc.perform(
                 put("/produtos")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(criarMockDeProdutoRequestDTO()))
+                        .content(objectMapper.writeValueAsString(Mocks.criarMockDeProdutoRequestDTO()))
         ).andExpect(status().isOk());
     }
 
     @Test
     public void quandoChamarOMetodoExcluirProduto_deveExcluirComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId("lçkj345")).thenReturn(criarMockDeProdutoResponseDTO());
+        when(produtoService.listarProdutoPorId("lçkj345")).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
         doNothing().when(produtoService).excluirProduto("lçkj345");
 
         this.mockMvc.perform(
@@ -87,26 +87,6 @@ public class ProdutoControllerTest {
         ).andExpect(status().isOk());
 
         produtoService.excluirProduto("lkjh2345");
-    }
-
-    public ProdutoRequestDTO criarMockDeProdutoRequestDTO() {
-        return ProdutoRequestDTO.builder()
-                .id("çwlekrjt")
-                .nome("banana")
-                .descricao("banana")
-                .marca("Panasonic")
-                .build();
-    }
-
-    public ProdutoResponseDTO criarMockDeProdutoResponseDTO() {
-        return ProdutoResponseDTO.builder()
-                .id("lkjwert")
-                .nome("banana novo")
-                .descricao("banana novo")
-                .marca("Panasonic")
-                .dataCadastro(LocalDateTime.now())
-                .dataUltAtualizacao(LocalDateTime.now())
-                .build();
     }
 
 }

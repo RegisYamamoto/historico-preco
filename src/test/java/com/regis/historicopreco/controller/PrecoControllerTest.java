@@ -1,9 +1,11 @@
 package com.regis.historicopreco.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.regis.historicopreco.model.Produto;
 import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.service.PrecoService;
+import com.regis.historicopreco.service.ProdutoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +34,9 @@ public class PrecoControllerTest {
     @MockBean
     private PrecoService precoService;
 
+    @MockBean
+    private ProdutoService produtoService;
+
     @Test
     public void quandoChamarMetodoCadastrarPreco_deveCadastrarComSucesso() throws Exception {
         PrecoRequestDTO precoRequestDtoMock = PrecoRequestDTO.builder()
@@ -47,6 +53,7 @@ public class PrecoControllerTest {
                 .dataUltAtualizacao(LocalDateTime.now())
                 .build();
 
+        when(produtoService.listarProdutoPorId("SM-F926BZKGZTO")).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
         doNothing().when(precoService).cadastrarPreco(precoRequestDtoMock, produtoResponseDtoMock);
 
         this.mockMvc.perform(
