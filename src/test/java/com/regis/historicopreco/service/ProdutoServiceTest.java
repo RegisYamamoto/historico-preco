@@ -1,5 +1,6 @@
 package com.regis.historicopreco.service;
 
+import com.regis.historicopreco.controller.Mocks;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
@@ -21,14 +22,7 @@ class ProdutoServiceTest {
 
 	@Test
 	public void quandoChamoOMetodoCadastrarProdutoComSucesso_deveCadastrarComSucesso() throws Exception {
-		ProdutoRequestDTO produtoRequestDtoMock = ProdutoRequestDTO.builder()
-				.id("aww")
-				.nome("banana")
-				.descricao("banana")
-				.marca("Panasonic")
-				.build();
-
-		produtoService.cadastrarProduto(produtoRequestDtoMock);
+		produtoService.cadastrarProduto(Mocks.criarMockDeProdutoRequestDTO());
 		verify(produtoRepository, times(1)).save(any());
 	}
 

@@ -51,7 +51,9 @@ public class ProdutoControllerTest {
 
     @Test
     public void quandoChamarMetodoCadastrarProduto_deveCadastrarComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId("kjh345")).thenReturn(null);
+        ProdutoResponseDTO produtoResponseDtoMock = new ProdutoResponseDTO();
+
+        when(produtoService.listarProdutoPorId("çwlekrjt")).thenReturn(produtoResponseDtoMock);
         doNothing().when(produtoService).cadastrarProduto(Mocks.criarMockDeProdutoRequestDTO());
 
         this.mockMvc.perform(

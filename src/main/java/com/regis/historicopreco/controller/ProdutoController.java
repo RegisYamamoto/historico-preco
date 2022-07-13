@@ -22,7 +22,7 @@ public class ProdutoController {
     @ResponseBody
     public ResponseEntity<Object> cadastrarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
-        if (produtoResponseDto != null) {
+        if (!produtoResponseDto.getId().isEmpty()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("produto com id " + produtoRequestDto.getId() + " já existe");
         }
         produtoService.cadastrarProduto(produtoRequestDto);

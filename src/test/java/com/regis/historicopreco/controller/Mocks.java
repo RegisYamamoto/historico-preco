@@ -10,12 +10,13 @@ import java.time.LocalDateTime;
 public class Mocks {
 
     public static ProdutoRequestDTO criarMockDeProdutoRequestDTO() {
-        return ProdutoRequestDTO.builder()
-                .id("çwlekrjt")
-                .nome("banana")
-                .descricao("banana")
-                .marca("Panasonic")
-                .build();
+        ProdutoRequestDTO produtoRequestDto = new ProdutoRequestDTO();
+        produtoRequestDto.setId("çwlekrjt");
+        produtoRequestDto.setNome("banana");
+        produtoRequestDto.setDescricao("banana");
+        produtoRequestDto.setMarca("Panasonic");
+
+        return produtoRequestDto;
     }
 
     public static ProdutoResponseDTO criarMockDeProdutoResponseDTO() {
@@ -30,10 +31,11 @@ public class Mocks {
     }
 
     public static PrecoRequestDTO criarMockDePrecoRequestDTO() {
-        return PrecoRequestDTO.builder()
-                .preco(new BigDecimal(10.10))
-                .lojaConsultada("Madre Leonia")
-                .build();
+        PrecoRequestDTO precoRequestDto = new PrecoRequestDTO();
+        precoRequestDto.setPreco(new BigDecimal(10.10));
+        precoRequestDto.setLojaConsultada("Madre Leonia");
+
+        return precoRequestDto;
     }
 
     public static Preco criarMockDePreco() {
