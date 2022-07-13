@@ -22,7 +22,7 @@ class ProdutoServiceTest {
 
 	@Test
 	public void quandoChamoOMetodoCadastrarProdutoComSucesso_deveCadastrarComSucesso() throws Exception {
-		produtoService.cadastrarProduto(Mocks.criarMockDeProdutoRequestDTO());
+		produtoService.cadastrarProduto(Mocks.criarMockDeProdutoRequestDto());
 		verify(produtoRepository, times(1)).save(any());
 	}
 

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class ProdutoController {
         if (!produtoResponseDto.getId().isEmpty()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("produto com id " + produtoRequestDto.getId() + " já existe");
         }
+
         produtoService.cadastrarProduto(produtoRequestDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoRequestDto);

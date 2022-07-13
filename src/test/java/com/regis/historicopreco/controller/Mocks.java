@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class Mocks {
 
-    public static ProdutoRequestDTO criarMockDeProdutoRequestDTO() {
+    public static ProdutoRequestDTO criarMockDeProdutoRequestDto() {
         ProdutoRequestDTO produtoRequestDto = new ProdutoRequestDTO();
         produtoRequestDto.setId("çwlekrjt");
         produtoRequestDto.setNome("banana");
@@ -19,7 +19,7 @@ public class Mocks {
         return produtoRequestDto;
     }
 
-    public static ProdutoResponseDTO criarMockDeProdutoResponseDTO() {
+    public static ProdutoResponseDTO criarMockDeProdutoResponseDto() {
         ProdutoResponseDTO produtoResponseDtoMock = new ProdutoResponseDTO();
         produtoResponseDtoMock.setId("lkjwert");
         produtoResponseDtoMock.setNome("banana novo");
@@ -30,7 +30,7 @@ public class Mocks {
         return produtoResponseDtoMock;
     }
 
-    public static PrecoRequestDTO criarMockDePrecoRequestDTO() {
+    public static PrecoRequestDTO criarMockDePrecoRequestDto() {
         PrecoRequestDTO precoRequestDto = new PrecoRequestDTO();
         precoRequestDto.setPreco(new BigDecimal(10.10));
         precoRequestDto.setLojaConsultada("Madre Leonia");

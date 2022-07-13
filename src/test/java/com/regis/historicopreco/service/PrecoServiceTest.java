@@ -25,7 +25,7 @@ public class PrecoServiceTest {
 
     @Test
     public void quandoChamoMetodoCadastrarPreco_deveSalvarComSucesso() {
-        precoService.cadastrarPreco(Mocks.criarMockDePrecoRequestDTO(), Mocks.criarMockDeProdutoResponseDTO());
+        precoService.cadastrarPreco(Mocks.criarMockDePrecoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
         verify(precoRepository, times(1)).save(any());
     }
 

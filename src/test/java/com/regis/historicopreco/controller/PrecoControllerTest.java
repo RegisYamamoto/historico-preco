@@ -37,13 +37,13 @@ public class PrecoControllerTest {
 
     @Test
     public void quandoChamarMetodoCadastrarPreco_deveCadastrarOPrecoComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId("SM-F926BZKGZTO")).thenReturn(Mocks.criarMockDeProdutoResponseDTO());
-        doNothing().when(precoService).cadastrarPreco(Mocks.criarMockDePrecoRequestDTO(), Mocks.criarMockDeProdutoResponseDTO());
+        when(produtoService.listarProdutoPorId("SM-F926BZKGZTO")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
+        doNothing().when(precoService).cadastrarPreco(Mocks.criarMockDePrecoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
 
         this.mockMvc.perform(
                 post("/produtos/SM-F926BZKGZTO/precos")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDTO()))
+                        .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDto()))
         ).andExpect(status().isCreated());
     }
 
@@ -54,7 +54,7 @@ public class PrecoControllerTest {
         this.mockMvc.perform(
                 put("/produtos/SM-F926BZKGZT1/precos/3")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDTO()))
+                        .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDto()))
         ).andExpect(status().isOk());
     }
 
