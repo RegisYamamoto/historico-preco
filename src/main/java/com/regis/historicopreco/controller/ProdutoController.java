@@ -39,7 +39,7 @@ public class ProdutoController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> listarProdutoPorId(@PathVariable String id) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(id);
-        if (produtoResponseDto == null) {
+        if (produtoResponseDto.getId().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("preduto com id " + id + " não existe");
         }
 
@@ -50,7 +50,7 @@ public class ProdutoController {
     public ResponseEntity<Object> atualizarProduto(@Valid @RequestBody ProdutoRequestDTO produtoRequestDto) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(produtoRequestDto.getId());
 
-        if (produtoResponseDto == null) {
+        if (produtoResponseDto.getId().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto com id " + produtoRequestDto.getId() + " não existe");
         }
 
@@ -63,7 +63,7 @@ public class ProdutoController {
     public ResponseEntity<Object> excluirProduto(@PathVariable String id) {
         ProdutoResponseDTO produtoResponseDto = produtoService.listarProdutoPorId(id);
 
-        if (produtoResponseDto == null) {
+        if (produtoResponseDto.getId().isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("produto com id " + id + " não existe");
         }
 

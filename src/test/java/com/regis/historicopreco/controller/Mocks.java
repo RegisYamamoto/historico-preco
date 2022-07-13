@@ -39,12 +39,13 @@ public class Mocks {
     }
 
     public static Preco criarMockDePreco() {
-        return Preco.builder()
-                .id(3L)
-                .preco(new BigDecimal(10.10))
-                .dataConsulta(LocalDateTime.now())
-                .lojaConsultadada("Americanas.com")
-                .build();
+        Preco preco = new Preco();
+        preco.setId(3L);
+        preco.setPreco(new BigDecimal(10.10));
+        preco.setDataConsulta(LocalDateTime.now());
+        preco.setLojaConsultadada("Americanas.com");
+
+        return preco;
     }
 
 }

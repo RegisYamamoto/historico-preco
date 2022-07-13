@@ -23,13 +23,12 @@ public class ProdutoService {
     private PrecoRepository precoRepository;
 
     public void cadastrarProduto(ProdutoRequestDTO produtoRequestDto) {
-        Produto produto = Produto.builder()
-                .id(produtoRequestDto.getId())
-                .nome(produtoRequestDto.getNome())
-                .descricao(produtoRequestDto.getDescricao())
-                .marca(produtoRequestDto.getMarca())
-                .dataCadastro(LocalDateTime.now())
-                .build();
+        Produto produto = new Produto();
+        produto.setId(produtoRequestDto.getId());
+        produto.setNome(produtoRequestDto.getNome());
+        produto.setDescricao(produtoRequestDto.getDescricao());
+        produto.setMarca(produtoRequestDto.getMarca());
+        produto.setDataCadastro(LocalDateTime.now());
 
         produtoRepository.save(produto);
     }
@@ -73,15 +72,14 @@ public class ProdutoService {
     }
 
     public void atualizarProduto(ProdutoRequestDTO produtoRequestDto, ProdutoResponseDTO produtoResponseDto) {
-        Produto produto = Produto.builder()
-                .id(produtoRequestDto.getId())
-                .nome(produtoRequestDto.getNome())
-                .descricao(produtoRequestDto.getDescricao())
-                .marca(produtoRequestDto.getMarca())
-                .dataCadastro(produtoResponseDto.getDataCadastro())
-                .dataUltAtualizacao(LocalDateTime.now())
-                .precos(produtoResponseDto.getPrecos())
-                .build();
+        Produto produto = new Produto();
+        produto.setId(produtoRequestDto.getId());
+        produto.setNome(produtoRequestDto.getNome());
+        produto.setDescricao(produtoRequestDto.getDescricao());
+        produto.setMarca(produtoRequestDto.getMarca());
+        produto.setDataCadastro(produtoResponseDto.getDataCadastro());
+        produto.setDataUltAtualizacao(LocalDateTime.now());
+        produto.setPrecos(produtoResponseDto.getPrecos());
 
         produtoRepository.save(produto);
     }
