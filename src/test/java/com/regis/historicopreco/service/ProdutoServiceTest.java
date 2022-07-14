@@ -1,12 +1,18 @@
 package com.regis.historicopreco.service;
 
-import com.regis.historicopreco.controller.Mocks;
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
+import com.regis.historicopreco.Mocks;
+import com.regis.historicopreco.model.Produto;
+import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -17,13 +23,51 @@ class ProdutoServiceTest {
 	@MockBean
 	private ProdutoRepository produtoRepository;
 
+	@MockBean
+	private PrecoRepository precoRepository;
+
 	@Autowired
 	private ProdutoService produtoService;
 
+
+	// cenários para o método listarTodosProdutos()
 	@Test
-	public void quandoChamoOMetodoCadastrarProdutoComSucesso_deveCadastrarComSucesso() throws Exception {
+	public void quandoChamarOMetodoCadastrarProdutoComSucesso_deveCadastrarComSucesso() {
 		produtoService.cadastrarProduto(Mocks.criarMockDeProdutoRequestDto());
 		verify(produtoRepository, times(1)).save(any());
+	}
+
+
+	// cenários para o método listarProdutoPorId()
+	@Test
+	public void quandoChamarOMetodoListarProdutoPorId_deveRetornarTodosOsProdutosComSucesso() {
+		List<Produto> produtosMock = new ArrayList<>();
+		produtosMock.add(Mocks.criarMockDeProduto());
+
+		List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
+		produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
+
+		when(produtoRepository.findAll()).thenReturn(produtosMock);
+
+		assertEquals(produtosResponseDtoMock, produtoService.listarTodosProdutos());
+	}
+
+
+	// cenários para o método atualizarProduto()
+	@Test
+	public void quandoChamarOMetodoAtualizarProduto_deveAtualizarProdutoComSucesso() {
+		when(produtoRepository.save(Mocks.criarMockDeProduto())).thenReturn(Mocks.criarMockDeProduto());
+
+		produtoService.atualizarProduto(Mocks.criarMockDeProdutoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
+	}
+
+
+	// cenários para o método excluirProduto()
+	@Test
+	public void quandoChamarOMetodoExcluirProduto_deveExcluirOProdutoComSucesso() {
+		produtoService.excluirProduto("asd123");
+		verify(precoRepository, times(1)).deleteAllByProdutoId("asd123");
+		verify(produtoRepository, times(1)).deleteById("asd123");
 	}
 
 }

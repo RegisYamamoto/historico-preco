@@ -1,6 +1,7 @@
 package com.regis.historicopreco.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.regis.historicopreco.Mocks;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.service.ProdutoService;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -22,9 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.any;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,14 +43,14 @@ public class ProdutoControllerTest {
     public void quandoChamarMetodoCadastrarProduto_deveCadastrarComSucesso() throws Exception {
         ProdutoResponseDTO produtoResponseDtoMock = new ProdutoResponseDTO();
 
-        when(produtoService.listarProdutoPorId("çwlekrjt")).thenReturn(produtoResponseDtoMock);
-        doNothing().when(produtoService).cadastrarProduto(Mocks.criarMockDeProdutoRequestDto());
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(produtoResponseDtoMock);
 
         this.mockMvc.perform(
                 post("/produtos")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(Mocks.criarMockDeProdutoRequestDto()))
         ).andExpect(status().isCreated());
+        verify(produtoService, times(1)).cadastrarProduto(Mocks.criarMockDeProdutoRequestDto());
     }
 
     @Test
@@ -69,8 +67,7 @@ public class ProdutoControllerTest {
 
     @Test
     public void quandoChamarMetodoCadastrarProdutoComIdQueNaoExiste_deveRetornarStatus409() throws Exception {
-        when(produtoService.listarProdutoPorId("çwlekrjt")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
-        doNothing().when(produtoService).cadastrarProduto(Mocks.criarMockDeProdutoRequestDto());
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
 
         this.mockMvc.perform(
                 post("/produtos")
@@ -96,8 +93,8 @@ public class ProdutoControllerTest {
     // cenários para o método listarProdutoPorId()
     @Test
     public void quandoChamarMetodoListarProdutoPorId_deveRetornarOProdutoComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId("aaa444")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
-        this.mockMvc.perform(get("/produtos/aaa444")).andExpect(status().isOk());
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
+        this.mockMvc.perform(get("/produtos/asd123")).andExpect(status().isOk());
     }
 
     @Test
@@ -105,9 +102,9 @@ public class ProdutoControllerTest {
         ProdutoResponseDTO produtoResponseDto = new ProdutoResponseDTO();
         produtoResponseDto.setId("");
 
-        when(produtoService.listarProdutoPorId("123aaa")).thenReturn(produtoResponseDto);
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(produtoResponseDto);
 
-        this.mockMvc.perform(get("/produtos/123aaa")).andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/produtos/asd123")).andExpect(status().isNotFound());
     }
 
 
@@ -115,13 +112,13 @@ public class ProdutoControllerTest {
     @Test
     public void quandoChamarOMetodoAtualizarProduto_deveAtualizarComSucesso() throws Exception {
         when(produtoService.listarProdutoPorId(any())).thenReturn(Mocks.criarMockDeProdutoResponseDto());
-        doNothing().when(produtoService).atualizarProduto(Mocks.criarMockDeProdutoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
 
         this.mockMvc.perform(
                 put("/produtos")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(Mocks.criarMockDeProdutoRequestDto()))
         ).andExpect(status().isOk());
+        verify(produtoService, times(1)).atualizarProduto(Mocks.criarMockDeProdutoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
     }
 
     @Test
@@ -138,7 +135,7 @@ public class ProdutoControllerTest {
 
     @Test
     public void quandoChamarOMetodoAtualizarProdutoComIdQueNaoExiste_deveRetornarErro404() throws Exception {
-        when(produtoService.listarProdutoPorId("çwlekrjt")).thenReturn(new ProdutoResponseDTO());
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(new ProdutoResponseDTO());
 
         this.mockMvc.perform(
                 put("/produtos")
@@ -151,22 +148,22 @@ public class ProdutoControllerTest {
     // cenários para o método excluirProduto()
     @Test
     public void quandoChamarOMetodoExcluirProduto_deveExcluirComSucesso() throws Exception {
-        when(produtoService.listarProdutoPorId("lçkj345")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
-        doNothing().when(produtoService).excluirProduto("lçkj345");
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
 
         this.mockMvc.perform(
-                delete("/produtos/lçkj345")
+                delete("/produtos/asd123")
         ).andExpect(status().isOk());
 
-        produtoService.excluirProduto("lkjh2345");
+        verify(produtoService, times(1)).excluirProduto("asd123");
     }
 
     @Test
     public void quandoChamarOMetodoExcluirProdutoComIdQueNaoExiste_deveRetornarErro404() throws Exception {
-        when(produtoService.listarProdutoPorId("lçkj345")).thenReturn(new ProdutoResponseDTO());
-        doNothing().when(produtoService).excluirProduto("lçkj345");
+        when(produtoService.listarProdutoPorId("asd123")).thenReturn(new ProdutoResponseDTO());
 
-        this.mockMvc.perform(delete("/produtos/lçkj345")).andExpect(status().isNotFound());
+        this.mockMvc.perform(
+                delete("/produtos/asd123")
+        ).andExpect(status().isNotFound());
     }
 
 }

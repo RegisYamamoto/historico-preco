@@ -1,6 +1,7 @@
 package com.regis.historicopreco.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.regis.historicopreco.Mocks;
 import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
@@ -14,13 +15,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doNothing;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -43,19 +42,20 @@ public class PrecoControllerTest {
     @Test
     public void quandoChamarOMetodoCadastrarPreco_deveCadastrarOPrecoComSucesso() throws Exception {
         when(produtoService.listarProdutoPorId("SM-F926BZKGZTO")).thenReturn(Mocks.criarMockDeProdutoResponseDto());
-        doNothing().when(precoService).cadastrarPreco(Mocks.criarMockDePrecoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
 
         this.mockMvc.perform(
                 post("/produtos/SM-F926BZKGZTO/precos")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(Mocks.criarMockDePrecoRequestDto()))
         ).andExpect(status().isCreated());
+        verify(precoService, times(1)).cadastrarPreco(Mocks.criarMockDePrecoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
     }
 
     @Test
     public void quandoChamarOMetodoCadastrarPrecoComOCampoPrecoNull_deveRetornarErro400() throws Exception {
         PrecoRequestDTO precoRequestDtoMock = new PrecoRequestDTO();
         precoRequestDtoMock.setPreco(null);
+
         this.mockMvc.perform(
                 post("/produtos/123/precos")
                         .contentType("application/json")
@@ -116,11 +116,11 @@ public class PrecoControllerTest {
     @Test
     public void quandoChamarOMetodoExcluirPreco_deveExcluirOPrecoComSucesso() throws Exception {
         when(precoService.listarPrecoPorId(3L)).thenReturn(Optional.of(Mocks.criarMockDePreco()));
-        doNothing().when(precoService).excluirPreco(3L);
 
         this.mockMvc.perform(
                 delete("/produtos/SM-F926BZKGZT1/precos/3"))
                 .andExpect(status().isOk());
+        verify(precoService, times(1)).excluirPreco(3L);
     }
 
     @Test
