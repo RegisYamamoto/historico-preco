@@ -15,6 +15,6 @@ public class ProdutoResponseDTO {
     private String marca = "";
     private LocalDateTime dataCadastro = LocalDateTime.now();
     private LocalDateTime dataUltAtualizacao = LocalDateTime.now();
-    private List<Preco> precos = new ArrayList<>();
+    private List<PrecoResponseDTO> precos = new ArrayList<>();
 
 }

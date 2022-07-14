@@ -1,6 +1,8 @@
 package com.regis.historicopreco.service;
 
+import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.Produto;
+import com.regis.historicopreco.model.dto.PrecoResponseDTO;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
@@ -45,7 +47,17 @@ public class ProdutoService {
             produtoResponseDto.setMarca(produto.getMarca());
             produtoResponseDto.setDataCadastro(produto.getDataCadastro());
             produtoResponseDto.setDataUltAtualizacao(produto.getDataUltAtualizacao());
-            produtoResponseDto.setPrecos(produto.getPrecos());
+
+            List<PrecoResponseDTO> precosResponseDto = new ArrayList<>();
+            for (Preco preco : produto.getPrecos()) {
+                PrecoResponseDTO precoResponseDto = new PrecoResponseDTO();
+                precoResponseDto.setId(preco.getId());
+                precoResponseDto.setPreco(preco.getPreco());
+                precoResponseDto.setDataConsulta(preco.getDataConsulta());
+                precoResponseDto.setLojaConsultadada(preco.getLojaConsultadada());
+                precosResponseDto.add(precoResponseDto);
+            }
+            produtoResponseDto.setPrecos(precosResponseDto);
 
             produtosResponseDto.add(produtoResponseDto);
         }
@@ -66,7 +78,17 @@ public class ProdutoService {
         produtoResponseDto.setMarca(produto.get().getMarca());
         produtoResponseDto.setDataCadastro(produto.get().getDataCadastro());
         produtoResponseDto.setDataUltAtualizacao(produto.get().getDataUltAtualizacao());
-        produtoResponseDto.setPrecos(produto.get().getPrecos());
+
+        List<PrecoResponseDTO> precosResponseDto = new ArrayList<>();
+        for (Preco preco : produto.get().getPrecos()) {
+            PrecoResponseDTO precoResponseDto = new PrecoResponseDTO();
+            precoResponseDto.setId(preco.getId());
+            precoResponseDto.setPreco(preco.getPreco());
+            precoResponseDto.setDataConsulta(preco.getDataConsulta());
+            precoResponseDto.setLojaConsultadada(preco.getLojaConsultadada());
+            precosResponseDto.add(precoResponseDto);
+        }
+        produtoResponseDto.setPrecos(precosResponseDto);
 
         return produtoResponseDto;
     }
@@ -79,7 +101,17 @@ public class ProdutoService {
         produto.setMarca(produtoRequestDto.getMarca());
         produto.setDataCadastro(produtoResponseDto.getDataCadastro());
         produto.setDataUltAtualizacao(LocalDateTime.now());
-        produto.setPrecos(produtoResponseDto.getPrecos());
+
+        List<PrecoResponseDTO> precosResponseDto = new ArrayList<>();
+        for (Preco preco : produto.getPrecos()) {
+            PrecoResponseDTO precoResponseDto = new PrecoResponseDTO();
+            precoResponseDto.setId(preco.getId());
+            precoResponseDto.setPreco(preco.getPreco());
+            precoResponseDto.setDataConsulta(preco.getDataConsulta());
+            precoResponseDto.setLojaConsultadada(preco.getLojaConsultadada());
+            precosResponseDto.add(precoResponseDto);
+        }
+        produtoResponseDto.setPrecos(precosResponseDto);
 
         produtoRepository.save(produto);
     }

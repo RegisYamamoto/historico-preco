@@ -34,7 +34,6 @@ public class Preco {
     private String lojaConsultadada = "";
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
