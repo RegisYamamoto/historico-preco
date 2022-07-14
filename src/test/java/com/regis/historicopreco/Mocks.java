@@ -35,7 +35,7 @@ public class Mocks {
     public static PrecoRequestDTO criarMockDePrecoRequestDto() {
         PrecoRequestDTO precoRequestDtoMock = new PrecoRequestDTO();
         precoRequestDtoMock.setPreco(new BigDecimal(10.10));
-        precoRequestDtoMock.setLojaConsultada("Madre Leonia");
+        precoRequestDtoMock.setLojaConsultada("Americanas.com");
 
         return precoRequestDtoMock;
     }

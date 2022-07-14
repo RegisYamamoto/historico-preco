@@ -6,7 +6,6 @@ import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -56,9 +55,8 @@ class ProdutoServiceTest {
 	// cenários para o método atualizarProduto()
 	@Test
 	public void quandoChamarOMetodoAtualizarProduto_deveAtualizarProdutoComSucesso() {
-		when(produtoRepository.save(Mocks.criarMockDeProduto())).thenReturn(Mocks.criarMockDeProduto());
-
 		produtoService.atualizarProduto(Mocks.criarMockDeProdutoRequestDto(), Mocks.criarMockDeProdutoResponseDto());
+		verify(produtoRepository, times(1)).save(any());
 	}
 
 
