@@ -40,7 +40,7 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-    public ProdutoResponsePageDTO listarTodosProdutos(int page, int size) {
+    public ProdutoResponsePageDTO listarTodosProdutos(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("nome"));
 
         Page<Produto> produtos = produtoRepository.findAll(pageable);

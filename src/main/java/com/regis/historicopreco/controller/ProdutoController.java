@@ -35,7 +35,7 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<Object> listarTodosProdutos(
-            @PathParam("page") int page, @PathParam("size") int size) {
+            @PathParam("page") Integer page, @PathParam("size") Integer size) {
         ProdutoResponsePageDTO produtoResponsePageDto = produtoService.listarTodosProdutos(page, size);
         return ResponseEntity.ok().body(produtoResponsePageDto);
     }

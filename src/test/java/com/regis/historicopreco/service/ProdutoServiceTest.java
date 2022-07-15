@@ -3,14 +3,17 @@ package com.regis.historicopreco.service;
 import com.regis.historicopreco.Mocks;
 import com.regis.historicopreco.model.Produto;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,19 +41,26 @@ class ProdutoServiceTest {
 
 
 	// cenários para o método listarProdutoPorId()
-//	@Test
-////	public void quandoChamarOMetodoListarProdutoPorId_deveRetornarTodosOsProdutosComSucesso() {
-////		List<Produto> produtosMock = new ArrayList<>();
-////		produtosMock.add(Mocks.criarMockDeProduto());
-////
-////		List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
-////		produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
-////
-////		when(produtoRepository.findAll()).thenReturn(produtosMock);
-////
-////		assertEquals(produtosResponseDtoMock, produtoService.listarTodosProdutos(0, 20));
-////	}
-	// TODO Arrumar
+	@Test
+	public void quandoChamarOMetodoListarProdutoPorId_deveRetornarTodosOsProdutosComSucesso() {
+		List<Produto> produtosMock = new ArrayList<>();
+		produtosMock.add(Mocks.criarMockDeProduto());
+
+		ProdutoResponsePageDTO produtoResponsePageDto = new ProdutoResponsePageDTO();
+		produtoResponsePageDto.setPage(0);
+		produtoResponsePageDto.setSize(20);
+		produtoResponsePageDto.setTotalPages(1);
+		List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
+		produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
+		produtoResponsePageDto.setProdutosResponseDto(produtosResponseDtoMock);
+
+		Pageable pageable = PageRequest.of(0, 20, Sort.by("nome"));
+		Page page = new PageImpl(produtosMock, pageable, 0L);
+
+		when(produtoRepository.findAll(pageable)).thenReturn(page);
+
+		assertEquals(produtoResponsePageDto, produtoService.listarTodosProdutos(0, 20));
+	}
 
 
 	// cenários para o método atualizarProduto()

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.regis.historicopreco.Mocks;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.service.ProdutoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,16 +79,21 @@ public class ProdutoControllerTest {
 
 
     // cenários para o método listarTodosProdutos()
-//    @Test
-//    public void quandoChamarMetodoListarTodosProdutos_deveRetornarComSucesso() throws Exception {
-//        List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
-//        produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
-//
-//        when(produtoService.listarTodosProdutos(0, 20)).thenReturn(produtosResponseDtoMock);
-//
-//        this.mockMvc.perform(get("/produtos")).andExpect(status().isOk());
-//    }
-    // TODO Descomentar
+    @Test
+    public void quandoChamarMetodoListarTodosProdutos_deveRetornarComSucesso() throws Exception {
+        ProdutoResponsePageDTO produtoResponsePageDtoMock = new ProdutoResponsePageDTO();
+        produtoResponsePageDtoMock.setPage(0);
+        produtoResponsePageDtoMock.setSize(20);
+        produtoResponsePageDtoMock.setTotalPages(30);
+
+        List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
+        produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
+        produtoResponsePageDtoMock.setProdutosResponseDto(produtosResponseDtoMock);
+
+        when(produtoService.listarTodosProdutos(0, 20)).thenReturn(produtoResponsePageDtoMock);
+
+        this.mockMvc.perform(get("/produtos")).andExpect(status().isOk());
+    }
 
 
     // cenários para o método listarProdutoPorId()

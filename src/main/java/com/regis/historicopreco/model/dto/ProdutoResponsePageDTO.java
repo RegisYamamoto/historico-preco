@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class ProdutoResponsePageDTO {
 
-    private int page = 0;
-    private int size = 0;
-    private int totalPages = 0;
+    private Integer page = 0;
+    private Integer size = 0;
+    private Integer totalPages = 0;
     private List<ProdutoResponseDTO> produtosResponseDto= new ArrayList<>();
 
 }
