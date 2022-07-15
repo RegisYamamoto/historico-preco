@@ -2,12 +2,15 @@ package com.regis.historicopreco.controller;
 
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.service.ProdutoService;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -31,9 +34,10 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProdutoResponseDTO>> listarTodosProdutos() {
-        List<ProdutoResponseDTO> produtos = produtoService.listarTodosProdutos();
-        return ResponseEntity.ok().body(produtos);
+    public ResponseEntity<Object> listarTodosProdutos(
+            @PathParam("page") int page, @PathParam("size") int size) {
+        ProdutoResponsePageDTO produtoResponsePageDto = produtoService.listarTodosProdutos(page, size);
+        return ResponseEntity.ok().body(produtoResponsePageDto);
     }
 
     @GetMapping(value = "/{id}")

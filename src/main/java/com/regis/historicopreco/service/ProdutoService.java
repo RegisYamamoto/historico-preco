@@ -5,9 +5,14 @@ import com.regis.historicopreco.model.Produto;
 import com.regis.historicopreco.model.dto.PrecoResponseDTO;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,8 +40,10 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-    public List<ProdutoResponseDTO> listarTodosProdutos() {
-        List<Produto> produtos = produtoRepository.findAll();
+    public ProdutoResponsePageDTO listarTodosProdutos(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("nome"));
+
+        Page<Produto> produtos = produtoRepository.findAll(pageable);
 
         List<ProdutoResponseDTO> produtosResponseDto = new ArrayList<>();
         for (Produto produto : produtos) {
@@ -62,7 +69,13 @@ public class ProdutoService {
             produtosResponseDto.add(produtoResponseDto);
         }
 
-        return produtosResponseDto;
+        ProdutoResponsePageDTO produtoResponsePageDTO = new ProdutoResponsePageDTO();
+        produtoResponsePageDTO.setPage(page);
+        produtoResponsePageDTO.setSize(size);
+        produtoResponsePageDTO.setTotalPages(produtos.getTotalPages());
+        produtoResponsePageDTO.setProdutosResponseDto(produtosResponseDto);
+
+        return produtoResponsePageDTO;
     }
 
     public ProdutoResponseDTO listarProdutoPorId(String id) {
