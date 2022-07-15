@@ -81,17 +81,7 @@ public class ProdutoControllerTest {
     // cenários para o método listarTodosProdutos()
     @Test
     public void quandoChamarMetodoListarTodosProdutos_deveRetornarComSucesso() throws Exception {
-        ProdutoResponsePageDTO produtoResponsePageDtoMock = new ProdutoResponsePageDTO();
-        produtoResponsePageDtoMock.setPage(0);
-        produtoResponsePageDtoMock.setSize(20);
-        produtoResponsePageDtoMock.setTotalPages(30);
-
-        List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
-        produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
-        produtoResponsePageDtoMock.setProdutosResponseDto(produtosResponseDtoMock);
-
-        when(produtoService.listarTodosProdutos(0, 20)).thenReturn(produtoResponsePageDtoMock);
-
+        when(produtoService.listarTodosProdutos(0, 20)).thenReturn(Mocks.criarMockDeProdutoResponsePageDTO());
         this.mockMvc.perform(get("/produtos")).andExpect(status().isOk());
     }
 

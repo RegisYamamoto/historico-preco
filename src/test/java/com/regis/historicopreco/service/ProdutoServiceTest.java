@@ -46,20 +46,12 @@ class ProdutoServiceTest {
 		List<Produto> produtosMock = new ArrayList<>();
 		produtosMock.add(Mocks.criarMockDeProduto());
 
-		ProdutoResponsePageDTO produtoResponsePageDto = new ProdutoResponsePageDTO();
-		produtoResponsePageDto.setPage(0);
-		produtoResponsePageDto.setSize(20);
-		produtoResponsePageDto.setTotalPages(1);
-		List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
-		produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
-		produtoResponsePageDto.setProdutosResponseDto(produtosResponseDtoMock);
-
 		Pageable pageable = PageRequest.of(0, 20, Sort.by("nome"));
 		Page page = new PageImpl(produtosMock, pageable, 0L);
 
 		when(produtoRepository.findAll(pageable)).thenReturn(page);
 
-		assertEquals(produtoResponsePageDto, produtoService.listarTodosProdutos(0, 20));
+		assertEquals(Mocks.criarMockDeProdutoResponsePageDTO(), produtoService.listarTodosProdutos(0, 20));
 	}
 
 

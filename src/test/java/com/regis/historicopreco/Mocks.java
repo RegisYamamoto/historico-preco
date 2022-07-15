@@ -5,8 +5,12 @@ import com.regis.historicopreco.model.Produto;
 import com.regis.historicopreco.model.dto.PrecoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mocks {
 
@@ -60,6 +64,19 @@ public class Mocks {
         produtoMock.setDataUltAtualizacao(LocalDateTime.of(2022, 7, 13, 23, 1, 1));
 
         return produtoMock;
+    }
+
+    public static ProdutoResponsePageDTO criarMockDeProdutoResponsePageDTO() {
+        ProdutoResponsePageDTO produtoResponsePageDtoMock = new ProdutoResponsePageDTO();
+        produtoResponsePageDtoMock.setPage(0);
+        produtoResponsePageDtoMock.setSize(20);
+        produtoResponsePageDtoMock.setTotalPages(1);
+
+        List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();
+        produtosResponseDtoMock.add(Mocks.criarMockDeProdutoResponseDto());
+        produtoResponsePageDtoMock.setProdutosResponseDto(produtosResponseDtoMock);
+
+        return produtoResponsePageDtoMock;
     }
 
 }
