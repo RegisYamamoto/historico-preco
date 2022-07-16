@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Data
 @Entity
@@ -27,7 +28,7 @@ public class Preco implements Serializable {
 
     @NotNull
     @Column(name = "data_consulta", nullable = false)
-    private LocalDateTime dataConsulta = LocalDateTime.now();
+    private LocalDateTime dataConsulta = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
     @NotNull
     @Column(name = "loja_consultada", nullable = false)

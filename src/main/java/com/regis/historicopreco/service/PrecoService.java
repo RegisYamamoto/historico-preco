@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class PrecoService {
 
         Preco preco = new Preco();
         preco.setPreco(precoRequestDto.getPreco());
-        preco.setDataConsulta(LocalDateTime.now());
+        preco.setDataConsulta(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         preco.setLojaConsultadada(precoRequestDto.getLojaConsultada());
         preco.setProduto(produto);
 

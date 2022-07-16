@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class ProdutoService {
         produto.setNome(produtoRequestDto.getNome());
         produto.setDescricao(produtoRequestDto.getDescricao());
         produto.setMarca(produtoRequestDto.getMarca());
-        produto.setDataCadastro(LocalDateTime.now());
+        produto.setDataCadastro(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         produtoRepository.save(produto);
     }
@@ -113,7 +114,7 @@ public class ProdutoService {
         produto.setDescricao(produtoRequestDto.getDescricao());
         produto.setMarca(produtoRequestDto.getMarca());
         produto.setDataCadastro(produtoResponseDto.getDataCadastro());
-        produto.setDataUltAtualizacao(LocalDateTime.now());
+        produto.setDataUltAtualizacao(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         List<PrecoResponseDTO> precosResponseDto = new ArrayList<>();
         for (Preco preco : produto.getPrecos()) {

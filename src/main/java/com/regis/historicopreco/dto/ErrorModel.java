@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Data
 public class ErrorModel {
@@ -18,7 +19,7 @@ public class ErrorModel {
 
     public ErrorModel(HttpStatus httpStatus, String message, String details) {
         this.httpStatus = httpStatus;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
         this.message = message;
         this.details = details;
     }
