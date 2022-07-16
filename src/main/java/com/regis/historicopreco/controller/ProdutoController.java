@@ -1,8 +1,8 @@
 package com.regis.historicopreco.controller;
 
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
+import com.regis.historicopreco.dto.ProdutoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

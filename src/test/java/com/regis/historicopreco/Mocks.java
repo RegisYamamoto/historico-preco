@@ -2,10 +2,10 @@ package com.regis.historicopreco;
 
 import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.Produto;
-import com.regis.historicopreco.model.dto.PrecoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
+import com.regis.historicopreco.dto.PrecoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.dto.ProdutoResponsePageDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

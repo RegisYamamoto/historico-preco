@@ -1,6 +1,5 @@
-package com.regis.historicopreco.model.dto;
+package com.regis.historicopreco.dto;
 
-import com.regis.historicopreco.model.Preco;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

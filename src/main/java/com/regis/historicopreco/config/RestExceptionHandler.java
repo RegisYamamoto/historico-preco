@@ -1,6 +1,6 @@
 package com.regis.historicopreco.config;
 
-import com.regis.historicopreco.model.dto.ErrorModel;
+import com.regis.historicopreco.dto.ErrorModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

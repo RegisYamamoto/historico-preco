@@ -2,9 +2,8 @@ package com.regis.historicopreco.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.regis.historicopreco.Mocks;
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
+import com.regis.historicopreco.dto.ProdutoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.service.ProdutoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest

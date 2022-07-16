@@ -2,8 +2,6 @@ package com.regis.historicopreco.service;
 
 import com.regis.historicopreco.Mocks;
 import com.regis.historicopreco.model.Produto;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
@@ -13,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

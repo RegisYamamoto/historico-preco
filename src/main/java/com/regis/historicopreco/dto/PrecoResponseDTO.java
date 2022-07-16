@@ -1,4 +1,4 @@
-package com.regis.historicopreco.model.dto;
+package com.regis.historicopreco.dto;
 
 import com.regis.historicopreco.model.Produto;
 import lombok.Data;

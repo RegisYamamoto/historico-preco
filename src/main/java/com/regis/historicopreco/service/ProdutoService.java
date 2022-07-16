@@ -2,10 +2,10 @@ package com.regis.historicopreco.service;
 
 import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.Produto;
-import com.regis.historicopreco.model.dto.PrecoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
+import com.regis.historicopreco.dto.PrecoResponseDTO;
+import com.regis.historicopreco.dto.ProdutoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import com.regis.historicopreco.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

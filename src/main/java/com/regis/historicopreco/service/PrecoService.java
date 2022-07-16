@@ -2,8 +2,8 @@ package com.regis.historicopreco.service;
 
 import com.regis.historicopreco.model.Preco;
 import com.regis.historicopreco.model.Produto;
-import com.regis.historicopreco.model.dto.PrecoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.dto.PrecoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.repository.PrecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

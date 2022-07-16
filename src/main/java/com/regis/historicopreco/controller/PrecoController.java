@@ -1,8 +1,8 @@
 package com.regis.historicopreco.controller;
 
 import com.regis.historicopreco.model.Preco;
-import com.regis.historicopreco.model.dto.PrecoRequestDTO;
-import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
+import com.regis.historicopreco.dto.PrecoRequestDTO;
+import com.regis.historicopreco.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.service.PrecoService;
 import com.regis.historicopreco.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
