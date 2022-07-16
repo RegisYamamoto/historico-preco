@@ -45,7 +45,7 @@ public class PrecoController {
 
         precoService.atualizarPreco(precoOpt, precoRequestDto);
 
-        return ResponseEntity.ok().body("preco atualizado com sucesso");
+        return ResponseEntity.ok().body(precoRequestDto);
     }
 
     @DeleteMapping("/{precoId}")

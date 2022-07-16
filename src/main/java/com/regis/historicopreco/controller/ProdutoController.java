@@ -59,7 +59,7 @@ public class ProdutoController {
 
         produtoService.atualizarProduto(produtoRequestDto, produtoResponseDto);
 
-        return ResponseEntity.ok().body("produto atualizado com sucesso");
+        return ResponseEntity.ok().body(produtoRequestDto);
     }
 
     @DeleteMapping("/{id}")
