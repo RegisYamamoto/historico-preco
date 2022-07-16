@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "produto")
-public class Produto {
+public class Produto implements Serializable {
 
     @Id
     @Column(name = "id")
     private String id = "";
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome = "";
 
     @Column(name = "descricao")
@@ -28,7 +29,7 @@ public class Produto {
     @Column(name = "marca")
     private String marca = "";
 
-    @Column(name = "data_cadastro")
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
     @Column(name = "data_ult_atualizacao")

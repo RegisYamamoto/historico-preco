@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "preco")
-public class Preco {
+public class Preco implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -22,15 +23,15 @@ public class Preco {
     private long id = 0L;
 
     @NotNull
-    @Column(name = "preco")
+    @Column(name = "preco", nullable = false)
     private BigDecimal preco = new BigDecimal(0.0);
 
     @NotNull
-    @Column(name = "data_consulta")
+    @Column(name = "data_consulta", nullable = false)
     private LocalDateTime dataConsulta = LocalDateTime.now();
 
     @NotNull
-    @Column(name = "loja_consultada")
+    @Column(name = "loja_consultada", nullable = false)
     private String lojaConsultadada = "";
 
     @ManyToOne
