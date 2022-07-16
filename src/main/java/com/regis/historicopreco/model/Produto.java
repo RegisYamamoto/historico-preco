@@ -1,8 +1,6 @@
 package com.regis.historicopreco.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,8 +10,6 @@ import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "produto")
 public class Produto implements Serializable {
 

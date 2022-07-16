@@ -12,8 +12,6 @@ import java.time.ZoneId;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "preco")
 public class Preco implements Serializable {
 
