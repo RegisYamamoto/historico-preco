@@ -4,17 +4,16 @@ import com.regis.historicopreco.model.dto.ProdutoRequestDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.model.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.service.ProdutoService;
-import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProdutoController {
 
     @Autowired
