@@ -5,6 +5,9 @@ import com.regis.historicopreco.dto.ProdutoResponseDTO;
 import com.regis.historicopreco.dto.ProdutoResponsePageDTO;
 import com.regis.historicopreco.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +37,9 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<Object> listarTodosProdutos(
-            @PathParam("page") Integer page, @PathParam("size") Integer size) {
-        ProdutoResponsePageDTO produtoResponsePageDto = produtoService.listarTodosProdutos(page, size);
+            @PageableDefault(page = 0, size = 10, sort = "nome", direction = Sort.Direction.ASC)
+            Pageable pageable) {
+        ProdutoResponsePageDTO produtoResponsePageDto = produtoService.listarTodosProdutos(pageable);
         return ResponseEntity.ok().body(produtoResponsePageDto);
     }
 

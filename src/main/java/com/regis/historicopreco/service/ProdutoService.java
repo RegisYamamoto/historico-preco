@@ -41,9 +41,7 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-    public ProdutoResponsePageDTO listarTodosProdutos(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("nome"));
-
+    public ProdutoResponsePageDTO listarTodosProdutos(Pageable pageable) {
         Page<Produto> produtos = produtoRepository.findAll(pageable);
 
         List<ProdutoResponseDTO> produtosResponseDto = new ArrayList<>();
@@ -71,8 +69,8 @@ public class ProdutoService {
         }
 
         ProdutoResponsePageDTO produtoResponsePageDTO = new ProdutoResponsePageDTO();
-        produtoResponsePageDTO.setPage(page);
-        produtoResponsePageDTO.setSize(size);
+        produtoResponsePageDTO.setPage(pageable.getPageNumber());
+        produtoResponsePageDTO.setSize(pageable.getPageSize());
         produtoResponsePageDTO.setTotalPages(produtos.getTotalPages());
         produtoResponsePageDTO.setProdutosResponseDto(produtosResponseDto);
 

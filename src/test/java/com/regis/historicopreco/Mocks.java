@@ -69,7 +69,7 @@ public class Mocks {
     public static ProdutoResponsePageDTO criarMockDeProdutoResponsePageDTO() {
         ProdutoResponsePageDTO produtoResponsePageDtoMock = new ProdutoResponsePageDTO();
         produtoResponsePageDtoMock.setPage(0);
-        produtoResponsePageDtoMock.setSize(20);
+        produtoResponsePageDtoMock.setSize(10);
         produtoResponsePageDtoMock.setTotalPages(1);
 
         List<ProdutoResponseDTO> produtosResponseDtoMock = new ArrayList<>();

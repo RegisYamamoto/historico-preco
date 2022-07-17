@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.awt.print.Pageable;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -76,7 +79,7 @@ public class ProdutoControllerTest {
     // cenários para o método listarTodosProdutos()
     @Test
     public void quandoChamarMetodoListarTodosProdutos_deveRetornarComSucesso() throws Exception {
-        when(produtoService.listarTodosProdutos(0, 20)).thenReturn(Mocks.criarMockDeProdutoResponsePageDTO());
+        when(produtoService.listarTodosProdutos(PageRequest.of(0, 10))).thenReturn(Mocks.criarMockDeProdutoResponsePageDTO());
         this.mockMvc.perform(get("/produtos")).andExpect(status().isOk());
     }
 
